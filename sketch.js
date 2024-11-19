@@ -1,5 +1,6 @@
 //You are standing in the entrance. Three doors lead to the same room, with small variations. You don't question how they can coexist at the same time and space/
 //Which one will you choose/
+//Potentially exploring different playthroughs
 
 let state = 'entrance';
 //the first door./
@@ -16,6 +17,7 @@ let door1 = {
 let door2 = {
   //The second door./
   //This one has very little light, you will have to touch (click) on the different objects to get a feel for what they are./
+  //Maybe because of low light the object you observe will have to be brought closer to your eyes ?/
   //If you enter you will get textual feedback/
   x: 200,
   y: 10,
@@ -91,6 +93,4 @@ function mouseWheel(){
      
 
 }
-
-
 

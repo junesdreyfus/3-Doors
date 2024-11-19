@@ -35,7 +35,7 @@ let door3 = {
   y: 10,
   width: 150,
   height: 350,
-  fill: 'rgb(48,51,48)',
+  fill: 'rgb(43,45,43)',
   floor: '#2B2A30',
 }
 function setup() {
@@ -58,6 +58,9 @@ function draw() {
   rect (door1.x+eyeMovementX, door1.y+eyeMovementY, door1.width, door1.height);
   fill(door1.floor);
   rect(door1.x+eyeMovementX, door1.y+(eyeMovementY/2)+door1.height/2, door1.width, (eyeMovementY/2)+door1.height/2);
+  fill('rgb(45,42,42)');
+    //overly complicated 3D geometry/
+  quad(door1.x+eyeMovementX+door1.width, door1.y+eyeMovementY, door1.x+eyeMovementX+door1.width, door1.y+eyeMovementY+door1.height, door1.x+door1.width, door1.y+(eyeMovementY/2)+(door1.height/2), door1.x+door1.width, door1.y+eyeMovementY);
   pop();
   
   push();
@@ -65,6 +68,9 @@ function draw() {
   rect (door2.x+eyeMovementX, door2.y+eyeMovementY, door2.width, door2.height);
   fill(door2.floor);
   rect(door2.x+eyeMovementX, door2.y+(eyeMovementY/2)+door2.height/2, door2.width, (eyeMovementY/2)+door2.height/2);
+    fill('rgb(45,42,42)');
+  //overly complicated 3D geometry/
+  quad(door2.x+eyeMovementX+door2.width, door2.y+eyeMovementY, door2.x+eyeMovementX+door2.width, door2.y+eyeMovementY+door2.height, door2.x+ door2.width, door2.y+(eyeMovementY/2)+(door2.height/2), door2.x+ door2.width, door2.y+eyeMovementY);
   pop();
   
   push();
@@ -72,6 +78,9 @@ function draw() {
   rect (door3.x+eyeMovementX, door3.y+eyeMovementY, door3.width, door3.height);
   fill(door3.floor);
   rect(door3.x+eyeMovementX, door3.y+(eyeMovementY/2)+door3.height/2, door3.width, (eyeMovementY/2)+door3.height/2);
+  fill('rgb(45,42,42)');
+  //overly complicated 3D geometry/
+  quad(door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY, door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY+door3.height, door3.x+ door3.width, door3.y+(eyeMovementY/2)+(door3.height/2), door3.x+ door3.width, door3.y+eyeMovementY);
   pop();
 
 }
@@ -103,6 +112,7 @@ function mouseWheel(){
     //The state is now set to entering2, a transitional state/
     //no turning back now/
   state = 'entering2';
+
   door2.y-=3;
   door2.x-=7;
   door2.width+=15;
@@ -124,6 +134,7 @@ function mouseWheel(){
     //The state is now set to entering3, a transitional state/
     //no turning back now/
   state = 'entering3';
+
   door3.y-=3;
   door3.x-=15/1.1;
   door3.width+=15;

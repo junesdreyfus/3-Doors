@@ -46,23 +46,31 @@ let door3 = {
   //each have a view for the 4 cardinals + floor
   //pos1north is default/
 
+let pos0 = undefined;
+
 let pos1down = undefined;
-let  pos1north = undefined;
+let pos1north = undefined;
 let pos1east = undefined;
 let pos1west = undefined;
 
+
 let pos2down = undefined;
 let pos2north = undefined;
+let pos2northnorth = undefined;
 let pos2east = undefined;
+let pos2west = undefined;
 let pos2south = undefined;
 
 let pos3down = undefined;
 let pos3east = undefined;
+let pos3north = undefined;
 let pos3west = undefined;
 let pos3south = undefined;
 
 function preload(){
   
+  pos0 = loadImage("assets/pos0.png");
+
   pos1down = loadImage("assets/pos1down.png");
  pos1north = loadImage("assets/pos1north.png");
  pos1east = loadImage("assets/pos1east.png");
@@ -71,13 +79,16 @@ function preload(){
  //pos2north is default
 pos2down = loadImage("assets/pos2down.png");
  pos2north = loadImage("assets/pos2north.png");
+ pos2northnorth = loadImage("assets/pos2northnorth.png");
  pos2east = loadImage("assets/pos2east.png");
+ pos2west = loadImage("assets/pos2west.png");
  pos2south = loadImage("assets/pos2south.png");
 
  //pos3east is default
 pos3down = loadImage("assets/pos3down.png");
 pos3east = loadImage("assets/pos3east.png");
 pos3west = loadImage("assets/pos3west.png");
+pos3north = loadImage("assets/pos3north.png");
 pos3south = loadImage("assets/pos3south.png");
 }
 
@@ -133,69 +144,97 @@ function draw() {
 
 if (state === "room1"){
   
-  
-  //starts pos1
+  //starts pos0
+
+  if (position === '0'){
+//display view when pos0
+image(pos0, -150+eyeMovementX, -100+eyeMovementY)
+//when user press f switch to pos1 (will change letter once it doesn't mess up the flow)
+    if (position === '0' && keyIsPressed === true && key === 'f')
+      position = '1'
+  }
   //starts with north view
   if(position === '1'){
     
-  image(pos1north, eyeMovementX, eyeMovementY)
+  image(pos1north, -150+eyeMovementX, -100+eyeMovementY)
     //user presses w = west view
     if (keyIsPressed === true && key === 'w'){
-      image(pos1west, eyeMovementX, eyeMovementY)
+      image(pos1west, -150+eyeMovementX, -100+eyeMovementY)
     }
     
         //user presses e = east view
     if (keyIsPressed === true && key === 'e'){
-      image(pos1east, eyeMovementX, eyeMovementY)
+      image(pos1east, -150+eyeMovementX, -100+eyeMovementY)
     }
     
             //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
-      image(pos1down, eyeMovementX, eyeMovementY)
+      image(pos1down, -150+eyeMovementX, -100+eyeMovementY)
     }
       
-            //user presses n key = move forward north to position2
+            //user presses f key = move forward north to position2
     if (position === '1' && keyIsPressed === true && key === 'n'){
       position = '2'
     }
   }
   
   if(position === '2'){
-    image(pos2north, eyeMovementX, eyeMovementY)
+    image(pos2north, -150+eyeMovementX, -100+eyeMovementY)
     
     //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
-      image(pos2down, eyeMovementX, eyeMovementY)
+      image(pos2down, -150+eyeMovementX, -100+eyeMovementY)
     }
+
+   //user presses n = northnorth view
+    if (keyIsPressed === true && key === 'n'){
+    image(pos2northnorth, -150+eyeMovementX, -100+eyeMovementY)
+    }
+
+    //user presses e = east view
+    if (keyIsPressed === true && key === 'e'){
+      image(pos2east, -150+eyeMovementX, -100+eyeMovementY)
+    }    
+
+    //user presses w = west view
+    if (keyIsPressed === true && key === 'w'){
+      image(pos2west, -150+eyeMovementX, -100+eyeMovementY)
+    }
+
       //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
-      image(pos2south, eyeMovementX, eyeMovementY)
+      image(pos2south, -150+eyeMovementX, -100+eyeMovementY)
     }
     
     }
     
-            //user presses e key = move to position3 east
-    if (position === '2' && keyIsPressed === true && key === 'e'){
+            //user presses f key = move to position3 east
+    if (position === '2' && keyIsPressed === true && key === 'f'){
       position = '3';
     }
   }
   
   if(position === '3'){
-    image(pos3east, eyeMovementX, eyeMovementY)
+    image(pos3east, -150+eyeMovementX, -100+eyeMovementY)
     
           //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
-      image(pos3south, eyeMovementX, eyeMovementY)
+      image(pos3south, -150+eyeMovementX, -100+eyeMovementY)
     }
     
+    //user presses n key = north view
+      if (keyIsPressed === true && key === 'n'){
+      image(pos3north, -150+eyeMovementX, -100+eyeMovementY)
+      }
+          
           //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
-      image(pos3down, eyeMovementX, eyeMovementY)
+      image(pos3down, -150+eyeMovementX, -100+eyeMovementY)
     }
     
           //user presses w key = west view
     if (keyIsPressed === true && key === 'w'){
-      image(pos3west, eyeMovementX, eyeMovementY)
+      image(pos3west, -150+eyeMovementX, -100+eyeMovementY)
     }
   }
   
@@ -223,7 +262,6 @@ function mouseWheel(){
     
     if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
-      position = '1'
     }
     //state changes to room1 once we've fully entered/
   }

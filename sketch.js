@@ -150,9 +150,10 @@ if (state === "room1"){
 //display view when pos0
 image(pos0, -150+eyeMovementX, -100+eyeMovementY)
 //when user press f switch to pos1 (will change letter once it doesn't mess up the flow)
-    if (position === '0' && keyIsPressed === true && key === 'f')
-      position = '1'
+//    if (position === '0' && keyIsPressed === true && key === 'f')
+//      position = '1'
   }
+
   //starts with north view
   if(position === '1'){
     
@@ -169,13 +170,13 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
     
             //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
-      image(pos1down, -150+eyeMovementX, -100+eyeMovementY)
+      image(pos1down, -100+eyeMovementX, -100+eyeMovementY)
     }
       
             //user presses f key = move forward north to position2
-    if (position === '1' && keyIsPressed === true && key === 'n'){
-      position = '2'
-    }
+  //  if (position === '1' && keyIsPressed === true && key === 'n'){
+  //    position = '2'
+  //  }
   }
   
   if(position === '2'){
@@ -193,12 +194,12 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
 
     //user presses e = east view
     if (keyIsPressed === true && key === 'e'){
-      image(pos2east, -150+eyeMovementX, -100+eyeMovementY)
+      image(pos2east, -100+eyeMovementX, -100+eyeMovementY)
     }    
 
     //user presses w = west view
     if (keyIsPressed === true && key === 'w'){
-      image(pos2west, -150+eyeMovementX, -100+eyeMovementY)
+      image(pos2west, -100+eyeMovementX, -100+eyeMovementY)
     }
 
       //user presses s key = south view
@@ -209,9 +210,9 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
     }
     
             //user presses f key = move to position3 east
-    if (position === '2' && keyIsPressed === true && key === 'f'){
-      position = '3';
-    }
+    //if (position === '2' && keyIsPressed === true && key === 'f'){
+    //  position = '3';
+   // }
   }
   
   if(position === '3'){
@@ -219,12 +220,17 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
     
           //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
-      image(pos3south, -150+eyeMovementX, -100+eyeMovementY)
+      image(pos3south, -150+eyeMovementX, -50+eyeMovementY)
     }
+
+    //user presses e key = east view
+       if (keyIsPressed === true && key === 'e'){
+       image(pos3east, -150+eyeMovementX, -100+eyeMovementY)
+       }
     
     //user presses n key = north view
       if (keyIsPressed === true && key === 'n'){
-      image(pos3north, -150+eyeMovementX, -100+eyeMovementY)
+      image(pos3north, -100+eyeMovementX, -100+eyeMovementY)
       }
           
           //user presses d = down view
@@ -240,6 +246,21 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   
   
 
+
+}
+
+function mousePressed(){
+  if(state === "room1"){
+    if (position === '0' && keyIsPressed === true && key === '1'){
+      position = '1'
+    }
+    if (position === '1' && keyIsPressed === true && key === '2'){
+      position = '2'
+    }
+    if (position === '2' && keyIsPressed === true && key === '3'){
+      position = '3'
+    }
+  }
 
 }
 

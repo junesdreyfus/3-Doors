@@ -53,13 +53,15 @@ function draw() {
   let eyeMovementY = map(mouseY, 0, height, 0, 20);
   
   //drawing the doors/
+  if(state === 'entrance' || state === 'entering1' || state === 'entering2' || state === 'entering3'){
   push();
   fill(door1.fill);
   rect (door1.x+eyeMovementX, door1.y+eyeMovementY, door1.width, door1.height);
   fill(door1.floor);
   rect(door1.x+eyeMovementX, door1.y+(eyeMovementY/2)+door1.height/2, door1.width, (eyeMovementY/2)+door1.height/2);
   fill('rgb(45,42,42)');
-    //overly complicated 3D geometry/
+  //jesus, lol/
+  //overly complicated quad to create illusion of 3D geometry/
   quad(door1.x+eyeMovementX+door1.width, door1.y+eyeMovementY, door1.x+eyeMovementX+door1.width, door1.y+eyeMovementY+door1.height, door1.x+door1.width, door1.y+(eyeMovementY/2)+(door1.height/2), door1.x+door1.width, door1.y+eyeMovementY);
   pop();
   
@@ -69,7 +71,7 @@ function draw() {
   fill(door2.floor);
   rect(door2.x+eyeMovementX, door2.y+(eyeMovementY/2)+door2.height/2, door2.width, (eyeMovementY/2)+door2.height/2);
     fill('rgb(45,42,42)');
-  //overly complicated 3D geometry/
+  //overly complicated quad to create illusion of 3D geometry/
   quad(door2.x+eyeMovementX+door2.width, door2.y+eyeMovementY, door2.x+eyeMovementX+door2.width, door2.y+eyeMovementY+door2.height, door2.x+ door2.width, door2.y+(eyeMovementY/2)+(door2.height/2), door2.x+ door2.width, door2.y+eyeMovementY);
   pop();
   
@@ -79,10 +81,10 @@ function draw() {
   fill(door3.floor);
   rect(door3.x+eyeMovementX, door3.y+(eyeMovementY/2)+door3.height/2, door3.width, (eyeMovementY/2)+door3.height/2);
   fill('rgb(45,42,42)');
-  //overly complicated 3D geometry/
+  //overly complicated quad to create illusion of 3D geometry/
   quad(door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY, door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY+door3.height, door3.x+ door3.width, door3.y+(eyeMovementY/2)+(door3.height/2), door3.x+ door3.width, door3.y+eyeMovementY);
   pop();
-
+  }
 }
 
 function mouseWheel(){
@@ -102,7 +104,7 @@ function mouseWheel(){
   door2.width+=15;
   door2.height+=15;
     
-    if (door1.x < 0 && door1.width >width){
+    if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
     }
     //state changes to room1 once we've fully entered/
@@ -124,7 +126,7 @@ function mouseWheel(){
   door3.y-=3;
   door3.height+=15;
     //    
-  if (door2.x < 0 && door2.width >width){
+  if (door2.x < -50 && door2.width >width+15){
   state = 'room2';
     //state changes to room2 once we fully entered/
     }
@@ -147,7 +149,7 @@ function mouseWheel(){
   door2.height+=15;
   door2.width+=10;
   //State changes to room3 once we've fully entered/
-  if (door3.x < 0 && door3.width >width){
+  if (door3.x < -50 && door3.width >width+15){
   state = 'room3';
     }
   }

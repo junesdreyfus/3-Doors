@@ -3,6 +3,8 @@
 
 //The entrance state/
 let state = 'entrance';
+
+let position = '0';
 //the first door./
 //this one has a window so you can see what's in it/
 //If you enter it you will get visual feedback/
@@ -38,6 +40,48 @@ let door3 = {
   fill: 'rgb(43,45,43)',
   floor: '#2B2A30',
 }
+
+
+  //position 1 2 3
+  //each have a view for the 4 cardinals + floor
+  //pos1north is default/
+
+let pos1down = undefined;
+let  pos1north = undefined;
+let pos1east = undefined;
+let pos1west = undefined;
+
+let pos2down = undefined;
+let pos2north = undefined;
+let pos2east = undefined;
+let pos2south = undefined;
+
+let pos3down = undefined;
+let pos3east = undefined;
+let pos3west = undefined;
+let pos3south = undefined;
+
+function preload(){
+  
+  pos1down = loadImage("assets/pos1down.png");
+ pos1north = loadImage("assets/pos1north.png");
+ pos1east = loadImage("assets/pos1east.png");
+ pos1west = loadImage("assets/pos1west.png");
+
+ //pos2north is default
+pos2down = loadImage("assets/pos2down.png");
+ pos2north = loadImage("assets/pos2north.png");
+ pos2east = loadImage("assets/pos2east.png");
+ pos2south = loadImage("assets/pos2south.png");
+
+ //pos3east is default
+pos3down = loadImage("assets/pos3down.png");
+pos3east = loadImage("assets/pos3east.png");
+pos3west = loadImage("assets/pos3west.png");
+pos3south = loadImage("assets/pos3south.png");
+}
+
+
 function setup() {
   createCanvas(600, 400);
 }
@@ -54,6 +98,7 @@ function draw() {
   
   //drawing the doors/
   if(state === 'entrance' || state === 'entering1' || state === 'entering2' || state === 'entering3'){
+    
   push();
   fill(door1.fill);
   rect (door1.x+eyeMovementX, door1.y+eyeMovementY, door1.width, door1.height);
@@ -85,6 +130,78 @@ function draw() {
   quad(door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY, door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY+door3.height, door3.x+ door3.width, door3.y+(eyeMovementY/2)+(door3.height/2), door3.x+ door3.width, door3.y+eyeMovementY);
   pop();
   }
+
+if (state === "room1"){
+  
+  
+  //starts pos1
+  //starts with north view
+  if(position === '1'){
+    
+  image(pos1north, eyeMovementX, eyeMovementY)
+    //user presses w = west view
+    if (keyIsPressed === true && key === 'w'){
+      image(pos1west, eyeMovementX, eyeMovementY)
+    }
+    
+        //user presses e = east view
+    if (keyIsPressed === true && key === 'e'){
+      image(pos1east, eyeMovementX, eyeMovementY)
+    }
+    
+            //user presses d = down view
+    if (keyIsPressed === true && key === 'd'){
+      image(pos1down, eyeMovementX, eyeMovementY)
+    }
+      
+            //user presses n key = move forward north to position2
+    if (position === '1' && keyIsPressed === true && key === 'n'){
+      position = '2'
+    }
+  }
+  
+  if(position === '2'){
+    image(pos2north, eyeMovementX, eyeMovementY)
+    
+    //user presses d = down view
+    if (keyIsPressed === true && key === 'd'){
+      image(pos2down, eyeMovementX, eyeMovementY)
+    }
+      //user presses s key = south view
+    if (keyIsPressed === true && key === 's'){
+      image(pos2south, eyeMovementX, eyeMovementY)
+    }
+    
+    }
+    
+            //user presses e key = move to position3 east
+    if (position === '2' && keyIsPressed === true && key === 'e'){
+      position = '3';
+    }
+  }
+  
+  if(position === '3'){
+    image(pos3east, eyeMovementX, eyeMovementY)
+    
+          //user presses s key = south view
+    if (keyIsPressed === true && key === 's'){
+      image(pos3south, eyeMovementX, eyeMovementY)
+    }
+    
+          //user presses d = down view
+    if (keyIsPressed === true && key === 'd'){
+      image(pos3down, eyeMovementX, eyeMovementY)
+    }
+    
+          //user presses w key = west view
+    if (keyIsPressed === true && key === 'w'){
+      image(pos3west, eyeMovementX, eyeMovementY)
+    }
+  }
+  
+  
+
+
 }
 
 function mouseWheel(){
@@ -106,6 +223,7 @@ function mouseWheel(){
     
     if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
+      position = '1'
     }
     //state changes to room1 once we've fully entered/
   }

@@ -20,6 +20,12 @@ let rightwall ={
   x: 550,
   y:-100
 }
+let midwall ={
+  x: -8,
+  y:-50,
+  width: 560,
+  height: 448,
+}
 let door1 = {
   x: 10,
   y: 10,
@@ -62,6 +68,7 @@ let opacity = 0
 
 let leftside = undefined;
 let rightside = undefined;
+let midside = undefined;
 
 let pos0 = undefined;
 
@@ -90,6 +97,7 @@ function preload(){
   
   leftside = loadImage("assets/leftside.png");
   rightside = loadImage("assets/rightside.png");
+  midside = loadImage("assets/midside.png");
 
   pos0 = loadImage("assets/pos0.png");
 
@@ -137,6 +145,9 @@ function draw() {
   if(state === 'entrance' || state === 'entering1' || state === 'entering2' || state === 'entering3'){
 
   
+    image(midside, midwall.x + eyeMovementX, midwall.y + eyeMovementY, midwall.width, midwall.height);
+    tint(255, 225);
+
   push();
   fill(door1.fill);
   rect (door1.x+eyeMovementX, door1.y+eyeMovementY, door1.width, door1.height);
@@ -399,6 +410,9 @@ function mouseWheel(){
 
   leftwall.x-=15;
   rightwall.x+=30*1.3;
+  midwall.x-=15;
+  midwall.width+=50;
+  midwall.height+=50;
     
     if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
@@ -425,6 +439,9 @@ function mouseWheel(){
 
   leftwall.x-=15;
   rightwall.x+=30*1.3;
+  midwall.x-=15;
+  midwall.width+=50;
+  midwall.height+=50;
     //    
   if (door2.x < -50 && door2.width >width+15){
   state = 'room2';
@@ -451,6 +468,10 @@ function mouseWheel(){
 
   leftwall.x-=15;
   rightwall.x+=30*1.3;
+  midwall.x-=15;
+  midwall.width+=50;
+  midwall.height+=50;
+  
   //State changes to room3 once we've fully entered/
   if (door3.x < -50 && door3.width >width+15){
   state = 'room3';

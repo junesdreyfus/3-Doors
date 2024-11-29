@@ -12,6 +12,14 @@ let position = '0';
 //the first door./
 //this one has a window so you can see what's in it/
 //If you enter it you will get visual feedback/
+let leftwall ={
+  x:-200,
+  y:-100,
+}
+let rightwall ={
+  x: 550,
+  y:-100
+}
 let door1 = {
   x: 10,
   y: 10,
@@ -52,6 +60,9 @@ let opacity = 0
   //each have a view for the 4 cardinals + floor
   //pos1north is default/
 
+let leftside = undefined;
+let rightside = undefined;
+
 let pos0 = undefined;
 
 let pos1down = undefined;
@@ -77,6 +88,9 @@ let pos3south = undefined;
 
 function preload(){
   
+  leftside = loadImage("assets/leftside.png");
+  rightside = loadImage("assets/rightside.png");
+
   pos0 = loadImage("assets/pos0.png");
 
   pos1down = loadImage("assets/pos1down.png");
@@ -121,7 +135,8 @@ function draw() {
   
   //drawing the doors/
   if(state === 'entrance' || state === 'entering1' || state === 'entering2' || state === 'entering3'){
-    
+
+  
   push();
   fill(door1.fill);
   rect (door1.x+eyeMovementX, door1.y+eyeMovementY, door1.width, door1.height);
@@ -153,7 +168,10 @@ function draw() {
   quad(door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY, door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY+door3.height, door3.x+ door3.width, door3.y+(eyeMovementY/2)+(door3.height/2), door3.x+ door3.width, door3.y+eyeMovementY);
   pop();
   }
-
+  image(leftside, leftwall.x + eyeMovementX, leftwall.y + eyeMovementY);
+  tint(255, 225);
+  image(rightside, rightwall.x + eyeMovementX, rightwall.y + (eyeMovementY/3));
+  tint(255, 225);
 if (state === "room1"){
 
   
@@ -378,6 +396,9 @@ function mouseWheel(){
   door3.x+=30*1.3;
   door2.width+=15;
   door2.height+=15;
+
+  leftwall.x-=15;
+  rightwall.x+=30*1.3;
     
     if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
@@ -401,6 +422,9 @@ function mouseWheel(){
   door3.x+=15;
   door3.y-=3;
   door3.height+=15;
+
+  leftwall.x-=15;
+  rightwall.x+=30*1.3;
     //    
   if (door2.x < -50 && door2.width >width+15){
   state = 'room2';
@@ -424,6 +448,9 @@ function mouseWheel(){
   door2.y-=3;
   door2.height+=15;
   door2.width+=10;
+
+  leftwall.x-=15;
+  rightwall.x+=30*1.3;
   //State changes to room3 once we've fully entered/
   if (door3.x < -50 && door3.width >width+15){
   state = 'room3';

@@ -13,8 +13,8 @@ let door1 = {
   y: 10,
   width: 150,
   height: 350,
-  fill: 'rgb(207,224,207)',
-  floor: 'rgb(85,71,61)',
+  fill: 'rgb(214,248,241)',
+  floor: 'rgb(57,69,67)',
 }
 let door2 = {
   //The second door./
@@ -278,6 +278,7 @@ function fadein(){
 }
 
 function chgPosition(){
+  //player can press space to walk in a given direction
   if(state === "room1"){
     if (position === '0' && (keyIsDown(32) && keyIsDown(78)) && opacity>250){
       opacity = 0;

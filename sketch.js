@@ -41,6 +41,8 @@ let door3 = {
   floor: '#2B2A30',
 }
 
+let opacity = 0
+
 
   //position 1 2 3
   //each have a view for the 4 cardinals + floor
@@ -101,6 +103,8 @@ function draw() {
   frameRate(8);
   background('rgb(131,121,110)');
   noStroke();
+  fadein();
+  chgPosition();
   
   //The view slightly adjusts to where the player is looking/
   //and it's sooo subtle/
@@ -143,11 +147,14 @@ function draw() {
   }
 
 if (state === "room1"){
+
   
   //starts pos0
 
   if (position === '0'){
 //display view when pos0
+
+tint(255, opacity);
 image(pos0, -150+eyeMovementX, -100+eyeMovementY)
 //when user press f switch to pos1 (will change letter once it doesn't mess up the flow)
 //    if (position === '0' && keyIsPressed === true && key === 'f')
@@ -156,20 +163,24 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
 
   //starts with north view
   if(position === '1'){
-    
+  
+    tint(255, opacity);
   image(pos1north, -150+eyeMovementX, -100+eyeMovementY)
     //user presses w = west view
     if (keyIsPressed === true && key === 'w'){
+      tint(255, opacity);
       image(pos1west, -150+eyeMovementX, -100+eyeMovementY)
     }
     
         //user presses e = east view
     if (keyIsPressed === true && key === 'e'){
+      tint(255, opacity);
       image(pos1east, -150+eyeMovementX, -100+eyeMovementY)
     }
     
             //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
+      tint(255, opacity);
       image(pos1down, -100+eyeMovementX, -100+eyeMovementY)
     }
       
@@ -180,30 +191,36 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   }
   
   if(position === '2'){
+    tint(255, opacity);
     image(pos2north, -150+eyeMovementX, -100+eyeMovementY)
     
     //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
+      tint(255, opacity);
       image(pos2down, -150+eyeMovementX, -100+eyeMovementY)
     }
 
    //user presses n = northnorth view
     if (keyIsPressed === true && key === 'n'){
+      tint(255, opacity);
     image(pos2northnorth, -150+eyeMovementX, -100+eyeMovementY)
     }
 
     //user presses e = east view
     if (keyIsPressed === true && key === 'e'){
+      tint(255, opacity);
       image(pos2east, -100+eyeMovementX, -100+eyeMovementY)
     }    
 
     //user presses w = west view
     if (keyIsPressed === true && key === 'w'){
+      tint(255, opacity);
       image(pos2west, -100+eyeMovementX, -100+eyeMovementY)
     }
 
       //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
+      tint(255, opacity);
       image(pos2south, -150+eyeMovementX, -100+eyeMovementY)
     }
     
@@ -216,30 +233,36 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   }
   
   if(position === '3'){
+    tint(255, opacity);
     image(pos3east, -150+eyeMovementX, -100+eyeMovementY)
     
           //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
+      tint(255, opacity);
       image(pos3south, -150+eyeMovementX, -50+eyeMovementY)
     }
 
     //user presses e key = east view
        if (keyIsPressed === true && key === 'e'){
+        tint(255, opacity);
        image(pos3east, -150+eyeMovementX, -100+eyeMovementY)
        }
     
     //user presses n key = north view
       if (keyIsPressed === true && key === 'n'){
+        tint(255, opacity);
       image(pos3north, -100+eyeMovementX, -100+eyeMovementY)
       }
           
           //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
+      tint(255, opacity);
       image(pos3down, -150+eyeMovementX, -100+eyeMovementY)
     }
     
           //user presses w key = west view
     if (keyIsPressed === true && key === 'w'){
+      tint(255, opacity);
       image(pos3west, -150+eyeMovementX, -100+eyeMovementY)
     }
   }
@@ -249,15 +272,23 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
 
 }
 
-function mousePressed(){
+function fadein(){
+  opacity += 51;
+  opacity = constrain(opacity, 0, 255)
+}
+
+function chgPosition(){
   if(state === "room1"){
-    if (position === '0' && keyIsPressed === true && key === '1'){
+    if (position === '0' && (keyIsDown(32) && keyIsDown(78)) && opacity>250){
+      opacity = 0;
       position = '1'
     }
-    if (position === '1' && keyIsPressed === true && key === '2'){
+    if (position === '1' && (keyIsDown(32) && keyIsDown(78)) && opacity>250){
+      opacity = 0;
       position = '2'
     }
-    if (position === '2' && keyIsPressed === true && key === '3'){
+    if (position === '2' && (keyIsDown(32) && keyIsDown(69)) && opacity>250){
+      opacity = 0;
       position = '3'
     }
   }
@@ -283,6 +314,7 @@ function mouseWheel(){
     
     if (door1.x < -15 && door1.width >width+15){
       state = 'room1';
+      opacity = 0;
     }
     //state changes to room1 once we've fully entered/
   }

@@ -3,8 +3,12 @@
 
 //The entrance state/
 let state = 'entrance';
-
+//room 1 default position/
 let position = '0';
+
+
+
+
 //the first door./
 //this one has a window so you can see what's in it/
 //If you enter it you will get visual feedback/
@@ -52,6 +56,8 @@ let pos0 = undefined;
 
 let pos1down = undefined;
 let pos1north = undefined;
+let pos1northnorth = undefined;
+let pos1south = undefined;
 let pos1east = undefined;
 let pos1west = undefined;
 
@@ -75,6 +81,8 @@ function preload(){
 
   pos1down = loadImage("assets/pos1down.png");
  pos1north = loadImage("assets/pos1north.png");
+ pos1northnorth = loadImage("assets/pos1northnorth.png");
+ pos1south = loadImage("assets/pos1south.png");
  pos1east = loadImage("assets/pos1east.png");
  pos1west = loadImage("assets/pos1west.png");
 
@@ -154,8 +162,14 @@ if (state === "room1"){
   if (position === '0'){
 //display view when pos0
 
-tint(255, opacity);
+tint(255, 255);
 image(pos0, -150+eyeMovementX, -100+eyeMovementY)
+text('N', 500, 350);
+if (position === '0' && keyIsPressed === true && key === 'n'){
+  text('N', 500, 350);
+  text('+SPACE BAR', 510, 350);
+}
+
 //when user press f switch to pos1 (will change letter once it doesn't mess up the flow)
 //    if (position === '0' && keyIsPressed === true && key === 'f')
 //      position = '1'
@@ -166,12 +180,34 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   
     tint(255, opacity);
   image(pos1north, -150+eyeMovementX, -100+eyeMovementY)
+  text('N', 500, 350);
+  text('S', 500, 380);
+  text('W', 480, 365);
+  text('E', 518, 365);
+
+  text('D', 525, 385);
+
+  if (keyIsPressed === true && key === 'n'){
+
+    tint(255, opacity);
+    image(pos1northnorth, -150+eyeMovementX, -100+eyeMovementY)
+    text('N', 500, 350);
+    text('+SPACE BAR', 510, 350);
+  }
     //user presses w = west view
     if (keyIsPressed === true && key === 'w'){
       tint(255, opacity);
       image(pos1west, -150+eyeMovementX, -100+eyeMovementY)
     }
     
+        //user presses s = south view
+        if (keyIsPressed === true && key === 's'){
+          tint(255, opacity);
+          image(pos1south, -150+eyeMovementX, -100+eyeMovementY)
+          text('S', 500, 350);
+          text('+SPACE BAR', 510, 350);
+        }
+
         //user presses e = east view
     if (keyIsPressed === true && key === 'e'){
       tint(255, opacity);
@@ -193,7 +229,15 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   if(position === '2'){
     tint(255, opacity);
     image(pos2north, -150+eyeMovementX, -100+eyeMovementY)
+
+    text('N', 500, 350);
+    text('S', 500, 380);
+    text('W', 480, 365);
+    text('E', 518, 365);
+
+    text('D', 525, 385);
     
+
     //user presses d = down view
     if (keyIsPressed === true && key === 'd'){
       tint(255, opacity);
@@ -210,6 +254,8 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
     if (keyIsPressed === true && key === 'e'){
       tint(255, opacity);
       image(pos2east, -100+eyeMovementX, -100+eyeMovementY)
+      text('E', 500, 350);
+      text('+SPACE BAR', 510, 350);
     }    
 
     //user presses w = west view
@@ -235,6 +281,13 @@ image(pos0, -150+eyeMovementX, -100+eyeMovementY)
   if(position === '3'){
     tint(255, opacity);
     image(pos3east, -150+eyeMovementX, -100+eyeMovementY)
+
+    text('N', 500, 350);
+    text('S', 500, 380);
+    text('W', 480, 365);
+    text('E', 518, 365);
+
+    text('D', 525, 385);
     
           //user presses s key = south view
     if (keyIsPressed === true && key === 's'){
@@ -277,16 +330,29 @@ function fadein(){
   opacity = constrain(opacity, 0, 255)
 }
 
+function room1UI(){
+  push();
+  rect ();
+  pop ();
+}
+
 function chgPosition(){
   //player can press space to walk in a given direction
   if(state === "room1"){
+
     if (position === '0' && (keyIsDown(32) && keyIsDown(78)) && opacity>250){
       opacity = 0;
       position = '1'
+      
     }
     if (position === '1' && (keyIsDown(32) && keyIsDown(78)) && opacity>250){
       opacity = 0;
       position = '2'
+    }
+    if (position === '1' && (keyIsDown(83) && keyIsDown(32)) && opacity>250){
+      opacity = 0;
+      position = '0';
+      state = 'entrance';
     }
     if (position === '2' && (keyIsDown(32) && keyIsDown(69)) && opacity>250){
       opacity = 0;

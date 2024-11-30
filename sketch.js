@@ -8,13 +8,57 @@ let position = '0';
 
 let SNOW_AMMOUNT = 90
 
-let blurredVisions =
-  {
-x: 100,
- y: 100,
-  size: 100,
-};
+let room2textbox ={
+  x: 100,
+  y: 300,
+  width: 500,
+  height: 100,
+  fill: 'rgb(0, 0, 0)',
+}
 
+let room2text =[
+  "I can feel the linoleum juice dripping out from where I stand.",
+  "I can barely see anything.",
+  "The room lets out a little breathing noise, like a gasp",
+   "I touch something spongious. I try to grab it but it crumbles under my fingers. I can feel bits of it getting in my nails.",
+   "A rolled up magazine. Probably the dirty kind.",
+   "Spirals of metal under my fingers. It's still warm. A stove top ?",
+   "I touch wood",
+   "A plastic container, no smaller than my fist. I think something's inside, but it's clogged up.",
+   "There's a wall.",
+   "A clothing hanger ? It's bent in a weird shape so it's hard to tell.",
+   "A cookie, I'm 99% sure it's not edible.",
+   "I found an expensive looking door. It's sealed shut.",
+   "I reach my hand but there's nothing there.",
+   "Books lined up. A shelf ? There's a tiny gap between two of them.",
+   "That's a phone.",
+   "An electric plug ? Someone cut it though.",
+   "A long metallic object. It's too heavy to carry.",
+   "This is the bed. It's empty.",
+   "A plastic bag. It's empty.",
+   "Files, too bad I can't see",
+   "A puddle.",
+   "That's nice.",
+   "I feel my legs bumping into a box. It seems to be a wooden night-stand",
+   "A poster on the wall, too bad I can't see",
+   "A sharp tool. Kitchen Appliance ?",
+   "A carpet ? It's not very clean.",
+   "A tube, I think it's the shower hose. I turn on the water to see if it still works. It does !",
+   "A cold surface",
+   "It's either an upside-down chair, or this person has spikes in their home.",
+   "I think it's a window. It's been sealed.",
+   "I don't know what that is.",
+   "I'm taking this.",
+   "Right now this feels like a jewel, but it's probably a tacky snowglobe",
+   "A sealed door. Maybe if I come back with something sturdy ?",
+   "I wonder who those people were.",
+   "A picture frame. Upon closer inspection it's empty.",
+   "That's a knife, not the cool kind.",
+   "One time Julien told me he found 50 bucks in one of these.",
+   "I don't want to stay here much longer.",
+   "A sink. There's tea leaves all over it.",
+
+]
 
 //the first door./
 //this one has a window so you can see what's in it/
@@ -365,6 +409,7 @@ if (position === '0' && keyIsPressed === true && key === 'n'){
   }
 
 if (state === "room2"){
+noCursor();
 push();
 fill (door2.fill);
 rect(0, 0, width, height);
@@ -373,27 +418,20 @@ pop();
  // A for-loop to count from 0 up to the number of stars
  for (let i = 0; i < SNOW_AMMOUNT; i++) {
   drawSnow();
-}
-
-drawBlurredShape();
-
-opacity = 0;
-opacity+=(random(0,+15));
-blurredVisions.x += random(0, 5);
-blurredVisions.y += random(0, 5);
-blurredVisions.size += random(-5, 5)
-
-if (opacity>25 || blurredVisions.x < 0 || blurredVisions.x > width || blurredVisions.y > height || blurredVisions.y < 0){
-  resetBlurredShape();
-}
-
-
-
-
-
-
 
 }
+
+drawTextBox();
+}
+
+}
+
+function drawTextBox(){
+  push();
+  stroke(255, 255, 255);
+  fill(room2textbox.fill);
+  rect (room2textbox.x, room2textbox.y, room2textbox.width, room2textbox.height);
+  pop();
 
 }
 
@@ -527,16 +565,4 @@ function mouseWheel(){
 
 }
 
-function drawBlurredShape(){
-  push();
-  fill(65, 65, 40, opacity);
-  rect(blurredVisions.x, blurredVisions.y, blurredVisions.size);
-  pop();
-}
 
-function resetBlurredShape(){
-  opacity = 0
-  blurredVisions.x = random(0, width);
-  blurredVisions.y = random(0,height);
-  blurredVisions.size = random(15, 100);
-}

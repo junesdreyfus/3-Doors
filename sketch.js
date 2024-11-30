@@ -8,6 +8,13 @@ let position = '0';
 
 let SNOW_AMMOUNT = 90
 
+let blurredVisions =
+  {
+x: 100,
+ y: 100,
+  size: 100,
+};
+
 
 //the first door./
 //this one has a window so you can see what's in it/
@@ -368,7 +375,17 @@ pop();
   drawSnow();
 }
 
+drawBlurredShape();
 
+opacity = 0;
+opacity+=(random(0,+15));
+blurredVisions.x += random(0, 5);
+blurredVisions.y += random(0, 5);
+blurredVisions.size += random(-5, 5)
+
+if (opacity>25 || blurredVisions.x < 0 || blurredVisions.x > width || blurredVisions.y > height || blurredVisions.y < 0){
+  resetBlurredShape();
+}
 
 
 
@@ -510,4 +527,16 @@ function mouseWheel(){
 
 }
 
+function drawBlurredShape(){
+  push();
+  fill(65, 65, 40, opacity);
+  rect(blurredVisions.x, blurredVisions.y, blurredVisions.size);
+  pop();
+}
 
+function resetBlurredShape(){
+  opacity = 0
+  blurredVisions.x = random(0, width);
+  blurredVisions.y = random(0,height);
+  blurredVisions.size = random(15, 100);
+}

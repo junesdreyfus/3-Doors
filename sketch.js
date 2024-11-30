@@ -6,7 +6,7 @@ let state = 'entrance';
 //room 1 default position/
 let position = '0';
 
-
+let SNOW_AMMOUNT = 90
 
 
 //the first door./
@@ -39,12 +39,13 @@ let door2 = {
   //This one has very little light, you will have to touch (click) on the different objects to get a feel for what they are./
   //Maybe because of low light the object you observe will have to be brought closer to your eyes ?/
   //If you enter you will get textual feedback/
+
   x: 200,
   y: 10,
   width: 150,
   height: 350,
-  fill: 'rgb(59,65,59)',
-  floor: '#64624F',
+  fill: 'rgb(43, 45, 43)',
+  floor: '#2B2A30',
 }
 let door3 = {
   //The third door./
@@ -55,8 +56,8 @@ let door3 = {
   y: 10,
   width: 150,
   height: 350,
-  fill: 'rgb(43,45,43)',
-  floor: '#2B2A30',
+  fill: 'rgb(20,20,0)',
+  floor: 'rgb(0,0,0)',
 }
 
 let opacity = 0
@@ -178,11 +179,18 @@ function draw() {
   //overly complicated quad to create illusion of 3D geometry/
   quad(door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY, door3.x+eyeMovementX+door3.width, door3.y+eyeMovementY+door3.height, door3.x+ door3.width, door3.y+(eyeMovementY/2)+(door3.height/2), door3.x+ door3.width, door3.y+eyeMovementY);
   pop();
-  }
+
   image(leftside, leftwall.x + eyeMovementX, leftwall.y + eyeMovementY);
   tint(255, 225);
   image(rightside, rightwall.x + eyeMovementX, rightwall.y + (eyeMovementY/3));
   tint(255, 225);
+  }
+
+  
+ 
+
+
+
 if (state === "room1"){
 
   
@@ -348,9 +356,27 @@ if (position === '0' && keyIsPressed === true && key === 'n'){
       image(pos3west, -150+eyeMovementX, -100+eyeMovementY)
     }
   }
-  
-  
 
+if (state === "room2"){
+push();
+fill (door2.fill);
+rect(0, 0, width, height);
+pop();
+
+ // A for-loop to count from 0 up to the number of stars
+ for (let i = 0; i < SNOW_AMMOUNT; i++) {
+  drawSnow();
+}
+
+
+
+
+
+
+
+
+
+}
 
 }
 
@@ -359,10 +385,14 @@ function fadein(){
   opacity = constrain(opacity, 0, 255)
 }
 
-function room1UI(){
+function drawSnow() {
   push();
-  rect ();
-  pop ();
+  const x = random(0, width);
+  const y = random(0, height);
+  const diameter = random(2, 100);
+  fill (door2.floor)
+  ellipse(x, y, diameter);
+  pop();
 }
 
 function chgPosition(){
@@ -479,3 +509,5 @@ function mouseWheel(){
   }
 
 }
+
+

@@ -6,7 +6,7 @@ let state = 'entrance';
 //room 1 default position/
 let position = '0';
 
-let SNOW_AMMOUNT = 90
+let SNOW_AMMOUNT = 4000;
 
 let room2textbox ={
   x: 100,
@@ -15,6 +15,8 @@ let room2textbox ={
   height: 100,
   fill: 'rgb(0, 0, 0)',
 }
+
+let room2tone = 'rgb(44,46,44)';
 
 let room2text =[
   "I can feel the linoleum juice dripping out from where I stand.",
@@ -96,7 +98,7 @@ let door2 = {
   width: 150,
   height: 350,
   fill: 'rgb(43, 45, 43)',
-  floor: '#2B2A30',
+  floor: 'rgb(43, 42, 48)',
 }
 let door3 = {
   //The third door./
@@ -145,6 +147,9 @@ let pos3north = undefined;
 let pos3west = undefined;
 let pos3south = undefined;
 
+let room2_2 = undefined;
+let room2_1 = undefined;
+
 function preload(){
   
   leftside = loadImage("assets/leftside.png");
@@ -174,6 +179,9 @@ pos3east = loadImage("assets/pos3east.png");
 pos3west = loadImage("assets/pos3west.png");
 pos3north = loadImage("assets/pos3north.png");
 pos3south = loadImage("assets/pos3south.png");
+
+room2_2 = loadImage("assets/room2_2.png");
+room2_1 = loadImage("assets/room2_1.png");
 }
 
 
@@ -410,10 +418,19 @@ if (position === '0' && keyIsPressed === true && key === 'n'){
 
 if (state === "room2"){
 noCursor();
+frameRate(5);
 push();
 fill (door2.fill);
 rect(0, 0, width, height);
 pop();
+
+
+
+opacity = random(0,5);
+tint(255, opacity);
+image(room2_1, 0, 0);
+tint(255, 5-opacity);
+image(room2_2, 0, 0);
 
  // A for-loop to count from 0 up to the number of stars
  for (let i = 0; i < SNOW_AMMOUNT; i++) {
@@ -421,7 +438,9 @@ pop();
 
 }
 
+
 drawTextBox();
+
 }
 
 }
@@ -440,12 +459,17 @@ function fadein(){
   opacity = constrain(opacity, 0, 255)
 }
 
+function fadeout(){
+  opacity += 51;
+  opacity = constrain(opacity, 0, 255)
+}
+
 function drawSnow() {
   push();
   const x = random(0, width);
   const y = random(0, height);
-  const diameter = random(2, 100);
-  fill (door2.floor)
+  const diameter = random(2, 10);
+  fill(room2tone);
   ellipse(x, y, diameter);
   pop();
 }
@@ -562,6 +586,13 @@ function mouseWheel(){
   state = 'room3';
     }
   }
+
+}
+
+function mousePressed(){
+if(state===door2){
+ 
+}
 
 }
 

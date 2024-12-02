@@ -6,7 +6,7 @@ let state = 'entrance';
 //room 1 default position/
 let position = '0';
 
-let SNOW_AMMOUNT = 3000;
+let SNOW_AMMOUNT = 4000;
 
 let touchConsole = "I can't see much..."
 
@@ -66,7 +66,6 @@ const flavortext ={
    "This spells something",
    "Magnet ! On the fridge ! Yeah I'm taking it",
    "The wallpaper could be really pretty for all I know",
-   "I wish pokémon were real",
    "No connection, of course",
    "Okay Robinson's Garden",
    "Okay Blair Witch",
@@ -80,6 +79,7 @@ const flavortext ={
    "There's a plank barring the window. I'm sure the view is just average",
    "This is surprisingly clean",
    "I should bring Julien next time",
+   "Dusty",
    "This flat is so small it's kinda depressing",
    "It's crazy how well you can hear what's happening outside",
    "I think I found the keys ! The door's open either way",
@@ -112,7 +112,7 @@ const flavortext ={
     "Hello ?",
     "I feel kinda sad",
     "crickets",
-    "A curtain ! Why is it detached",
+    "A curtain ! Why is it detached?",
     "Uuuuh, that's a laptop I think. I shouldn't bother.",
     "I feel kinda lonely",
     "I'm so glad I'm alone here",
@@ -120,6 +120,12 @@ const flavortext ={
     "My place would be so boring to explore, man",
     "This is sad...",
     "This feels a bit wrong",
+    "This is all tiles",
+    "That's a large closet.",
+    "A ventilator thingie ? It's really cold outside right now though",
+    "That's a table ? It's so heavy",
+    "The closet is stuck",
+    "A plastic thingie ? That can't be comfy",
     "Something gooey in the push-up bottle. It doesn't smell like anything",
     "uhhhh...",
     "Hygienic.",
@@ -201,6 +207,8 @@ let leftside = undefined;
 let rightside = undefined;
 let midside = undefined;
 
+let hand = undefined;
+
 let pos0 = undefined;
 
 let pos1down = undefined;
@@ -234,6 +242,8 @@ function preload(){
   midside = loadImage("assets/midside.png");
 
   pos0 = loadImage("assets/pos0.png");
+
+  hand = loadImage("assets/hand.png");
 
   pos1down = loadImage("assets/pos1down.png");
  pos1north = loadImage("assets/pos1north.png");
@@ -277,10 +287,15 @@ function draw() {
   //and it's sooo subtle/
   let eyeMovementX = map(mouseX, 0, width, 0, 40);
   let eyeMovementY = map(mouseY, 0, height, 0, 20);
+
+  
   
   //drawing the doors/
   if(state === 'entrance' || state === 'entering1' || state === 'entering2' || state === 'entering3'){
 
+    image(rightside, rightwall.x - eyeMovementX/4, rightwall.y + (eyeMovementY/3));
+    tint(255, 225);
+    }
   
     image(midside, midwall.x + eyeMovementX, midwall.y + eyeMovementY, midwall.width, midwall.height);
     tint(255, 225);
@@ -318,9 +333,7 @@ function draw() {
 
   image(leftside, leftwall.x + eyeMovementX, leftwall.y + eyeMovementY);
   tint(255, 225);
-  image(rightside, rightwall.x + eyeMovementX, rightwall.y + (eyeMovementY/3));
-  tint(255, 225);
-  }
+
 
   
  
@@ -331,7 +344,7 @@ if (state === "room1"){
 
   
   //starts pos0
-
+noCursor();
   if (position === '0'){
 //display view when pos0
 
@@ -511,6 +524,9 @@ tint(255, opacity);
 image(room2_1, 0, 0);
 tint(255, 5-opacity);
 image(room2_2, 0, 0);
+
+tint(255, 255);
+image(hand, mouseX, mouseY);
 
  // A for-loop to count from 0 up to the number of stars
  for (let i = 0; i < SNOW_AMMOUNT; i++) {

@@ -106,7 +106,7 @@ const flavortext ={
    "Is that a dvd ? What year is it ???",
    "This stays a secret",
    "I can't believe this",
-   "Nothing interesting",
+   "Nothing interesting", 
    "People have so much stuff man, it's crazy.",
     "Spooky ass place",
     "Hello ?",
@@ -116,7 +116,7 @@ const flavortext ={
     "Uuuuh, that's a laptop I think. I shouldn't bother.",
     "I feel kinda lonely",
     "I'm so glad I'm alone here",
-    "I'm so stupid for not taking that lamp",
+    "I'm so stupid for not bringing that flashlight",
     "My place would be so boring to explore, man",
     "This is sad...",
     "This feels a bit wrong",
@@ -198,16 +198,17 @@ let door3 = {
 
 let opacity = 0
 
-
-  //position 1 2 3
-  //each have a view for the 4 cardinals + floor
-  //pos1north is default/
+let sample1 = undefined;
 
 let leftside = undefined;
 let rightside = undefined;
 let midside = undefined;
 
 let hand = undefined;
+
+  //position 1 2 3
+  //each have a view for the 4 cardinals + floor
+  //pos1north is default/
 
 let pos0 = undefined;
 
@@ -236,6 +237,8 @@ let room2_2 = undefined;
 let room2_1 = undefined;
 
 function preload(){
+
+  sample1 = loadSound("assets/sample.wav");
   
   leftside = loadImage("assets/leftside.png");
   rightside = loadImage("assets/rightside.png");
@@ -539,6 +542,21 @@ showTouchConsole();
 
 }
 
+if(state === "room3"){
+
+  push();
+  fill(door3.fill);
+  rect(0,0,width, height);
+  pop();
+
+//Adding sound to the draw function to not have to deal with big file size and also create synthethizer from looping samples./
+//The samples will play with every frame (every .2 seconds).
+//I just need to make sure the user interacts first with the program, otherwise the browser seems to block sound from playing./
+
+sample1.play();
+
+}
+
 }
 
 function showTouchConsole(){
@@ -698,4 +716,6 @@ if ( mouseIsPressed === true){
 
 }
 
-
+function blindSynth(){
+  
+}

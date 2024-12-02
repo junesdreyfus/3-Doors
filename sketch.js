@@ -8,17 +8,21 @@ let position = '0';
 
 let SNOW_AMMOUNT = 4000;
 
+let touchConsole = "I can't see much..."
+
 let room2textbox ={
   x: 100,
   y: 300,
   width: 500,
   height: 100,
+  padding: 10,
   fill: 'rgb(0, 0, 0)',
 }
 
 let room2tone = 'rgb(44,46,44)';
 
-let room2text =[
+const flavortext ={
+  touchConsole:[
   "I can feel the linoleum juice dripping out from where I stand.",
   "I can barely see anything.",
   "The room lets out a little breathing noise, like a gasp",
@@ -26,7 +30,7 @@ let room2text =[
    "A rolled up magazine. Probably the dirty kind.",
    "Spirals of metal under my fingers. It's still warm. A stove top ?",
    "I touch wood",
-   "A plastic container, no smaller than my fist. I think something's inside, but it's clogged up.",
+   "A plastic container, no smaller than my fist. I think something's inside, but it's all clogged up.",
    "There's a wall.",
    "A clothing hanger ? It's bent in a weird shape so it's hard to tell.",
    "A cookie, I'm 99% sure it's not edible.",
@@ -58,9 +62,9 @@ let room2text =[
    "That's a knife, not the cool kind.",
    "One time Julien told me he found 50 bucks in one of these.",
    "I don't want to stay here much longer.",
-   "A sink. There's tea leaves all over it.",
-
-]
+   "A sink. There are tea leaves all over it.",
+   "...",]
+}
 
 //the first door./
 //this one has a window so you can see what's in it/
@@ -417,12 +421,15 @@ if (position === '0' && keyIsPressed === true && key === 'n'){
   }
 
 if (state === "room2"){
+
 noCursor();
 frameRate(5);
 push();
 fill (door2.fill);
 rect(0, 0, width, height);
 pop();
+
+touching();
 
 
 
@@ -439,17 +446,23 @@ image(room2_2, 0, 0);
 }
 
 
-drawTextBox();
+showTouchConsole();
 
 }
 
 }
 
-function drawTextBox(){
+function showTouchConsole(){
   push();
   stroke(255, 255, 255);
   fill(room2textbox.fill);
   rect (room2textbox.x, room2textbox.y, room2textbox.width, room2textbox.height);
+  pop();
+
+  push();
+  fill(255);
+  textSize(12);
+  text(touchConsole, room2textbox.x + room2textbox.padding, room2textbox.y + room2textbox.padding , room2textbox.width - 2 * room2textbox.padding, room2textbox.height * room2textbox.padding);
   pop();
 
 }
@@ -589,9 +602,9 @@ function mouseWheel(){
 
 }
 
-function mousePressed(){
-if(state===door2){
- 
+function touching(){
+if ( mouseIsPressed === true){
+ touchConsole = random(flavortext.touchConsole)
 }
 
 }

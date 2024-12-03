@@ -1,4 +1,9 @@
-//You are standing in the entrance. Three doors lead to the same room, with small variations./
+//3- Doors/
+//by Junes Dreyfus
+
+//About breaking and entering, at different stages of a house's life.
+
+//You are standing in the entrance. Three doors lead to the same room, with 3 variations./
 //Which one will you choose/
 
 //The entrance state/
@@ -15,9 +20,6 @@ let synthVar ={
   bn: 0,
 }
 
-
-
-
 let touchConsole = "I can't see much..."
 
 let synthCommands = "-> G H J K L                    Q/W  T/Y  B/N              E/R"
@@ -33,151 +35,7 @@ let room2textbox ={
 
 let room2tone = 'rgb(44,46,44)';
 
-const flavortext ={
-  touchConsole:[
-  "I can feel the linoleum juice dripping out from where I stand.",
-  "I can barely see anything.",
-  "The room lets out a little breathing noise, like a gasp",
-   "I touch something spongious. I try to grab it but it crumbles under my fingers. I can feel bits of it getting in my nails.",
-   "A rolled up magazine. Probably the dirty kind.",
-   "Spirals of metal under my fingers. It's still warm. A stove top ?",
-   "I touch wood",
-   "A plastic container, no smaller than my fist. I think something's inside, but it's all clogged up.",
-   "There's a wall.",
-   "A clothing hanger ? It's bent in a weird shape so it's hard to tell.",
-   "A cookie, I'm 99% sure it's not edible.",
-   "I found an expensive looking door. It's sealed shut.",
-   "I reach my hand but there's nothing there.",
-   "Books lined up. A shelf ? There's a tiny gap between two of them.",
-   "That's a phone.",
-   "An electric plug ? Someone cut it though.",
-   "A long metallic object. It's too heavy to carry.",
-   "This is the bed. It's empty.",
-   "A plastic bag. It's empty.",
-   "Files, too bad I can't see",
-   "A puddle.",
-   "For sure someone died here",
-   "A flattened cardboard box.",
-   "Pencils, abandonned",
-   "Is that a TV ? It's nailed to the wall",
-   "A kettle, it's cold to the touch",
-   "Something sharp",
-   "I wonder what this room smells like",
-   "I bet this room smells bad",
-   "I bet this room smells something like wet fabric",
-   "I bet this room smells like burnt plastic",
-   "So so humid",
-   "That's a weird space for a stair",
-   "That's a weird space for a bed",
-   "A trapdoor ? I'd rather not.",
-   "I think the bed can be rolled up into a couch. Comfy",
-   "I feel something but I can't really grasp what",
-   "A microwave ? Or a really smooth box",
-   "The fridge! It's empty",
-   "I have no idea what that is",
-   "This spells something",
-   "Magnet ! On the fridge ! Yeah I'm taking it",
-   "The wallpaper could be really pretty for all I know",
-   "No connection, of course",
-   "Okay Robinson's Garden",
-   "Okay Blair Witch",
-   "This is just like in that one movie",
-   "I should take a poster, but what if it's really really boring",
-   "A plant in a pot. Not thriving",
-   "I found the weed stash. It's dry",
-   "There's something under there. It's quite light",
-   "The air feels so stiff",
-   "The air feels so dense",
-   "There's a plank barring the window. I'm sure the view is just average",
-   "This is surprisingly clean",
-   "I should bring Julien next time",
-   "Dusty",
-   "This flat is so small it's kinda depressing",
-   "It's crazy how well you can hear what's happening outside",
-   "I think I found the keys ! The door's open either way",
-   "Pots and pans, and, so many little bottles... What ??",
-   "This feels wrong",
-   "Did this person have a cat?",
-   "Empty plastic bottles on the shelf. They have a push-up cap",
-   "This feels dated",
-   "I guess what I'm doing counts as breaking and entering",
-   "Pillows, ew",
-   "A course surface",
-   "A smooth surface",
-   "Tangled up... strings ?",
-   "This used to be food I think",
-   "A surprisingly thick clothing hanger",
-   "A wooden clothing hanger",
-   "That's nice.",
-   "I feel my legs bumping into a box. It seems to be a wooden night-stand",
-   "A poster on the wall, too bad I can't see",
-   "A sharp tool. Kitchen Appliance ?",
-   "A carpet ? It's not very clean.",
-   "A tube, I think it's the shower hose. I turn on the water to see if it still works. It does !",
-   "A cold surface",
-   "It's either an upside-down chair, or this person has spikes in their home.",
-   "I think it's a window. It's been sealed.",
-   "I don't know what that is.",
-   "I'm taking this.",
-   "Right now I would say this is a jewel, but it's probably just a tacky snow-globe",
-   "Is that a dvd ? What year is it ???",
-   "This stays a secret",
-   "I can't believe this",
-   "Nothing interesting", 
-   "People have so much stuff man, it's crazy.",
-    "Spooky ass place",
-    "Hello ?",
-    "I feel kinda sad",
-    "crickets",
-    "A curtain ! Why is it detached?",
-    "Uuuuh, that's a laptop I think. I shouldn't bother.",
-    "I feel kinda lonely",
-    "I'm so glad I'm alone here",
-    "I'm so stupid for not bringing that flashlight",
-    "My place would be so boring to explore, man",
-    "This is sad...",
-    "This feels a bit wrong",
-    "This is all tiles",
-    "That's a large closet.",
-    "A ventilator thingie ? It's really cold outside right now though",
-    "That's a table ? It's so heavy",
-    "The closet is stuck",
-    "A plastic thingie ? That can't be comfy",
-    "Something gooey in the push-up bottle. It doesn't smell like anything",
-    "uhhhh...",
-    "Hygienic.",
-    "Let's keep it that way, huh ?",
-   "Ashtray !! Somehow this doesn't surprise me",
-   "This shouldn't be here",
-   "This person loves water bottles",
-   "A sealed door. Maybe if I come back with something sturdy ?",
-   "I wonder who those people were.",
-   "A picture frame. Upon closer inspection it's empty.",
-   "That's a knife, not the cool kind.",
-   "One time Julien told me he found 50 bucks in one of these.",
-   "I don't want to stay here much longer.",
-   "A sink. There are tea leaves all over it.",
-   "Where is this ?",
-   "I can't reach this",
-   "I can't touch this",
-   "This feels nice to the touch",
-   "My arm is too short",
-   "I'm not touching that",
-   "A glass surface...?",
-   "A wet surface",
-   "A moist surface, I think there might have been a leak",
-   "A lukewarm surface",
-   "A cold surface",
-   "A metallic surface",
-   "A metallic surface, I got a tiny shock from touching it",
-   "A velvety surface",
-   "...",]
-   
-}
 
-//the first door./
-//this one has a window so you can see what's in it/
-//If you enter it you will get visual feedback/
 let leftwall ={
   x:-200,
   y:-100,
@@ -192,6 +50,9 @@ let midwall ={
   width: 560,
   height: 448,
 }
+//the first door./
+//this one has a window so you can see what's in it/
+//If you enter it you will get visual feedback/
 let door1 = {
   x: 10,
   y: 10,
@@ -227,6 +88,9 @@ let door3 = {
 }
 
 let opacity = 0
+
+
+let flavortxt = undefined;
 
 let sample1 = undefined;
 let sample2 = undefined;
@@ -277,6 +141,8 @@ let room2_2 = undefined;
 let room2_1 = undefined;
 
 function preload(){
+
+  flavortxt = loadJSON("assets/flavortxt.json");
 
   sample1 = loadSound("assets/sample 1.wav");
   sample2 = loadSound("assets/sample 2.wav");
@@ -715,14 +581,16 @@ function showTouchConsole(){
 }
 
 function synthCommand(){
+
+
   push();
-  stroke(255, 255, 255);
-  fill(255);
-  rect (0, 370, width, room2textbox.height);
+  fill(55);
+  textSize(12);
+  text("IT'S PITCH BLACK IN HERE. I CAN'T SEE A THING", 0 + room2textbox.padding, 0 + room2textbox.padding , width - 2 * room2textbox.padding, room2textbox.height * room2textbox.padding);
   pop();
 
   push();
-  fill(0);
+  fill(55);
   textSize(12);
   text(synthCommands, 0 + room2textbox.padding, 370 + room2textbox.padding , width - 2 * room2textbox.padding, room2textbox.height * room2textbox.padding);
   pop();
@@ -866,7 +734,9 @@ function mouseWheel(){
 
 function touching(){
 if ( mouseIsPressed === true){
- touchConsole = random(flavortext.touchConsole)
+const touchData = random(flavortxt.touchConsole);
+touchConsole = touchData;
+ //touchConsole = random(flavortext.touchConsole);
 }
 }
 

@@ -8,7 +8,19 @@ let position = '0';
 
 let SNOW_AMMOUNT = 4000;
 
+let synthVar ={
+  qw: 0,
+  ty: 0,
+  er: 0,
+  bn: 0,
+}
+
+
+
+
 let touchConsole = "I can't see much..."
+
+let synthCommands = "-> G H J K L                    Q/W  T/Y  B/N              E/R"
 
 let room2textbox ={
   x: 100,
@@ -88,9 +100,14 @@ const flavortext ={
    "Did this person have a cat?",
    "Empty plastic bottles on the shelf. They have a push-up cap",
    "This feels dated",
-   "Oh my god that's a camera. It's not great but I'll take it anyway",
    "I guess what I'm doing counts as breaking and entering",
    "Pillows, ew",
+   "A course surface",
+   "A smooth surface",
+   "Tangled up... strings ?",
+   "This used to be food I think",
+   "A surprisingly thick clothing hanger",
+   "A wooden clothing hanger",
    "That's nice.",
    "I feel my legs bumping into a box. It seems to be a wooden night-stand",
    "A poster on the wall, too bad I can't see",
@@ -142,7 +159,20 @@ const flavortext ={
    "A sink. There are tea leaves all over it.",
    "Where is this ?",
    "I can't reach this",
+   "I can't touch this",
+   "This feels nice to the touch",
+   "My arm is too short",
+   "I'm not touching that",
+   "A glass surface...?",
+   "A wet surface",
+   "A moist surface, I think there might have been a leak",
+   "A lukewarm surface",
+   "A cold surface",
+   "A metallic surface",
+   "A metallic surface, I got a tiny shock from touching it",
+   "A velvety surface",
    "...",]
+   
 }
 
 //the first door./
@@ -199,6 +229,16 @@ let door3 = {
 let opacity = 0
 
 let sample1 = undefined;
+let sample2 = undefined;
+let sample3 = undefined;
+let sample4 = undefined;
+let sample5 = undefined;
+let sample6 = undefined;
+let sample7 = undefined;
+let sample8 = undefined;
+let sample9 = undefined;
+let sample10 = undefined;
+let sample11 = undefined;
 
 let leftside = undefined;
 let rightside = undefined;
@@ -238,7 +278,17 @@ let room2_1 = undefined;
 
 function preload(){
 
-  sample1 = loadSound("assets/sample.wav");
+  sample1 = loadSound("assets/sample 1.wav");
+  sample2 = loadSound("assets/sample 2.wav");
+  sample3 = loadSound("assets/sample 3.wav");
+  sample4 = loadSound("assets/sample 4.wav");
+  sample5 = loadSound("assets/sample 5.wav");
+  sample6 = loadSound("assets/sample 6.wav");
+  sample7 = loadSound("assets/sample 7.wav");
+  sample8 = loadSound("assets/sample 8.wav");
+  sample9 = loadSound("assets/sample 9.wav");
+  sample10 = loadSound("assets/sample 10.wav");
+  sample11 = loadSound("assets/sample 11.wav");
   
   leftside = loadImage("assets/leftside.png");
   rightside = loadImage("assets/rightside.png");
@@ -544,17 +594,107 @@ showTouchConsole();
 
 if(state === "room3"){
 
+  //Adding sound to the draw function to not have to deal with big file size and also create synthethizer from looping samples./
+//The samples will play with every frame (every .2 seconds).
+//I just need to make sure the user interacts first, otherwise the browser blocks the program from playing sound./
+
+synthVar.er = constrain(synthVar.er, -4, 10);
+synthVar.qw = constrain(synthVar.qw, -5, 5);
+synthVar.bn = constrain(synthVar.bn, -5, 5);
+
+
+  frameRate(5+synthVar.er);
+
   push();
   fill(door3.fill);
   rect(0,0,width, height);
+  fill(door3.floor);
+  rect(0,350, width, 50);
   pop();
 
-//Adding sound to the draw function to not have to deal with big file size and also create synthethizer from looping samples./
-//The samples will play with every frame (every .2 seconds).
-//I just need to make sure the user interacts first with the program, otherwise the browser seems to block sound from playing./
 
-sample1.play();
+  //Synth command should work with a total of 8 buttons.
+  //4 pairs of buttons : QW ER TY and BN/
 
+synthCommand();
+
+//Q cancels W out, B cancels N out./
+//
+
+ 
+  if(keyIsPressed && key === 'q'){
+    synthVar.qw+=1;
+  }
+  if(keyIsPressed && key === 'w'){
+    synthVar.qw-=1;
+  }
+
+  if(keyIsPressed && key === 'b'){
+    synthVar.bn+=1;
+  }
+  if(keyIsPressed && key === 'n'){
+    synthVar.bn-=1;
+  }
+
+  if(keyIsPressed && key === 't'){
+    synthVar.ty+=1;
+  }
+  if(keyIsPressed && key === 'y'){
+    synthVar.ty-=1;
+  }
+
+    //ER manipulates time. E makes framerate (thus sound trigger) faster R makes framerate slower (it seems to stop at 1fps)
+    if(keyIsPressed && key === 'e'){
+      synthVar.er+=1;
+    }
+    if (keyIsPressed && key === 'r'){
+      synthVar.er-=1;
+    }
+  
+
+//G and H are triggers, right foot sound, left footsound respectively/
+  if (keyIsPressed && key === 'g'){
+    sample10.play();
+  }
+  if (keyIsPressed && key === 'h'){
+    sample11.play();
+  }
+
+  if (keyIsPressed && key === 'j'){
+    sample7.play();
+  }
+  if (keyIsPressed && key === 'k'){
+    sample4.play();
+  }
+
+  if (keyIsPressed && key === 'l'){
+    sample3.play();
+  }
+
+
+
+if (synthVar.bn < 0){
+  sample6.play();
+}
+
+if (synthVar.bn > 0){
+  sample5.play();
+}
+
+
+if (synthVar.qw < 0){
+sample9.play();
+}
+if (synthVar.qw > 0){
+  sample8.play();
+}
+
+if (synthVar.ty < 0.5){
+  sample1.play();
+  }
+  if (synthVar.ty > 0){
+    sample2.play();
+  }
 }
 
 }
@@ -570,6 +710,21 @@ function showTouchConsole(){
   fill(255);
   textSize(12);
   text(touchConsole, room2textbox.x + room2textbox.padding, room2textbox.y + room2textbox.padding , room2textbox.width - 2 * room2textbox.padding, room2textbox.height * room2textbox.padding);
+  pop();
+
+}
+
+function synthCommand(){
+  push();
+  stroke(255, 255, 255);
+  fill(255);
+  rect (0, 370, width, room2textbox.height);
+  pop();
+
+  push();
+  fill(0);
+  textSize(12);
+  text(synthCommands, 0 + room2textbox.padding, 370 + room2textbox.padding , width - 2 * room2textbox.padding, room2textbox.height * room2textbox.padding);
   pop();
 
 }
@@ -713,9 +868,5 @@ function touching(){
 if ( mouseIsPressed === true){
  touchConsole = random(flavortext.touchConsole)
 }
-
 }
 
-function blindSynth(){
-  
-}
